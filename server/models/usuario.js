@@ -6,7 +6,7 @@ let Schema = mongoose.Schema;
 let usuarioSchema = new Schema({
     nombre: {
         type: String,
-        required: [true, 'Ingrese su nombre']
+        required: [true, 'Ingrese su nombre, por favor']
     },
     apellido: {
         type: String,
@@ -14,20 +14,20 @@ let usuarioSchema = new Schema({
     },
     password: {
         type: String,
-        required: [true, 'Ingrese una contraseña']
+        required: [true, 'Ingrese una contraseña, por favor']
     },
     email: {
         type: String,
         unique: true,
-        required: [true, 'Ingrese su email']
+        required: [true, 'Ingrese su email, por favor']
     },
-    img:{
+    img: {
         type: String,
     }
-    
+
 });
 
-usuarioSchema.plugin(uniquevalidator,{
+usuarioSchema.plugin(uniquevalidator, {
     message: '{PATH} Debe que ser único'
 });
 

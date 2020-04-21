@@ -11,7 +11,7 @@ let libroSchema = new Schema({
     },
     descripcion: {
         type: String,
-        required: [true, 'Ingrese una descripción']
+        required: [true, 'Ingrese una descripción breve, por favor']
     },
     disponible: {
         type: Boolean,
