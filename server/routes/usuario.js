@@ -6,7 +6,7 @@ const Usuario = require('../models/usuario');
 const { verificaToken } = require('../middleware/autenticacion');
 
 
-app.get('/usuario', [verificaToken], function(req, res) {
+app.get('/usuario', function(req, res) {
     let desde = req.query.desde || 0;
     let limite = req.query.limite || 0;
 
