@@ -7,6 +7,9 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 // FIRMA SECRETA DE JWT 
 process.env.FIRMA = process.env.FIRMA || 'firma-super-secreta';
 
+//EXPIRE TIME JWT
+process.env.EXPTIME = process.env.EXPTIME || '20min';
+
 // CONEXION A LA BASE DE DATOS 
 let urlDB;
 

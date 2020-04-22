@@ -4,7 +4,7 @@ const Prestamo = require('../models/prestamo');
 const { verificaToken } = require('../middleware/autenticacion');
 const app = express();
 
-app.get('/prestamo', (req, res) => {
+app.get('/prestamo', [verificaToken], (req, res) => {
     Prestamo.find()
         .exec((err, prestamo) => {
             if (err) {
@@ -22,7 +22,7 @@ app.get('/prestamo', (req, res) => {
         });
 });
 
-app.post('/prestamo', (req, res) => {
+app.post('/prestamo', [verificaToken], (req, res) => {
     let body = req.body;
 
     let prestamo = new Prestamo({
@@ -49,7 +49,7 @@ app.post('/prestamo', (req, res) => {
     });
 });
 
-app.put('/prestamo', function(req, res) {
+app.put('/prestamo', [verificaToken], function(req, res) {
     let id = req.params.id;
     let body = _.pick(req.body, ['usuario', 'libro', 'fechaPrestamo', 'fechaEntrega']);
 
@@ -68,7 +68,7 @@ app.put('/prestamo', function(req, res) {
     });
 });
 
-app.delete('/prestamo/:id', function(req, res) {
+app.delete('/prestamo/:id', [verificaToken], function(req, res) {
     let id = req.params.id;
 
     Prestamo.findByIdAndUpdate(id, { estado: false }, { new: true, runValidators: true, context: 'query' }, (err, resp) => {

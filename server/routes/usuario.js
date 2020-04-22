@@ -6,7 +6,7 @@ const Usuario = require('../models/usuario');
 const { verificaToken } = require('../middleware/autenticacion');
 
 
-app.get('/usuario', function(req, res) {
+app.get('/usuario', [verificaToken], function(req, res) {
     let desde = req.query.desde || 0;
     let limite = req.query.limite || 0;
 
@@ -61,7 +61,7 @@ app.post('/usuario', [verificaToken], function(req, res) {
 
 
 });
-app.put('/usuario/:id', function(req, res) {
+app.put('/usuario/:id', [verificaToken], function(req, res) {
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre', 'email']);
 
@@ -81,7 +81,7 @@ app.put('/usuario/:id', function(req, res) {
 });
 
 
-app.delete('/usuario/:id', function(req, res) {
+app.delete('/usuario/:id', [verificaToken], function(req, res) {
     let id = req.params.id;
 
     Usuario.findByIdAndUpdate(id, { estado: false }, { new: true, runValidators: true, context: 'query' }, (err, resp) => {

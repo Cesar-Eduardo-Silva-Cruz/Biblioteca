@@ -10,7 +10,7 @@ const Libro = require('../models/libro');
 
 app.use(fileupload());
 
-app.put('/upload/:ruta/:id', (req, res) => {
+app.put('/upload/:ruta/:id', [verificaToken], (req, res) => {
     let id = req.params.id;
     let ruta = req.params.ruta;
     let archivo = req.files.archivo;

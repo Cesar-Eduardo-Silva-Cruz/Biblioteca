@@ -4,7 +4,7 @@ const { verificaToken } = require('../middleware/autenticacion');
 const Libro = require('../models/libro');
 const app = express();
 
-app.get('/libro', (req, res) => {
+app.get('/libro', [verificaToken], (req, res) => {
     Libro.find()
         .exec((err, libros) => {
             if (err) {
@@ -22,7 +22,7 @@ app.get('/libro', (req, res) => {
         });
 });
 
-app.post('/libro', (req, res) => {
+app.post('/libro', [verificaToken], (req, res) => {
     let body = req.body;
 
     let libro = new Libro({
@@ -48,7 +48,7 @@ app.post('/libro', (req, res) => {
     });
 });
 
-app.put('/libro/:id', function(req, res) {
+app.put('/libro/:id', [verificaToken], function(req, res) {
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre', 'categoria', 'descripcion']);
 
@@ -67,7 +67,7 @@ app.put('/libro/:id', function(req, res) {
     });
 });
 
-app.delete('/libro/:id', function(req, res) {
+app.delete('/libro/:id', [verificaToken], function(req, res) {
     let id = req.params.id;
 
     Libro.findByIdAndUpdate(id, { estado: false }, { new: true, runValidators: true, context: 'query' }, (err, resp) => {
