@@ -48,7 +48,7 @@ app.post('/libro', [verificaToken], (req, res) => {
     });
 });
 
-app.put('/libro/:id', function(req, res) {
+app.put('/libro/:id', [verificaToken], function(req, res) {
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre', 'categoria', 'descripcion']);
 
@@ -67,7 +67,7 @@ app.put('/libro/:id', function(req, res) {
     });
 });
 
-app.delete('/libro/:id', function(req, res) {
+app.delete('/libro/:id', [verificaToken], function(req, res) {
     let id = req.params.id;
 
     Libro.findByIdAndUpdate(id, { estado: false }, { new: true, runValidators: true, context: 'query' }, (err, resp) => {
