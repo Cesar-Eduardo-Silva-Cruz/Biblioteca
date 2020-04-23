@@ -49,7 +49,7 @@ app.post('/prestamo', [verificaToken], (req, res) => {
     });
 });
 
-app.put('/prestamo', [verificaToken], function(req, res) {
+app.put('/prestamo', function(req, res) {
     let id = req.params.id;
     let body = _.pick(req.body, ['usuario', 'libro', 'fechaPrestamo', 'fechaEntrega']);
 
@@ -68,7 +68,7 @@ app.put('/prestamo', [verificaToken], function(req, res) {
     });
 });
 
-app.delete('/prestamo/:id', [verificaToken], function(req, res) {
+app.delete('/prestamo/:id', function(req, res) {
     let id = req.params.id;
 
     Prestamo.findByIdAndUpdate(id, { estado: false }, { new: true, runValidators: true, context: 'query' }, (err, resp) => {
